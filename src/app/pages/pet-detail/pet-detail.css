@@ -1,0 +1,212 @@
+:host {
+  display: block;
+}
+
+.petd {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px 16px 40px;
+}
+
+.petd__state {
+  text-align: center;
+  padding: 40px 0;
+  color: #555;
+}
+.petd__state--error {
+  color: #b00020;
+}
+
+.petd__crumbs {
+  margin-bottom: 12px;
+}
+.crumb {
+  color: #555;
+  text-decoration: none;
+  font-weight: 500;
+}
+.crumb:hover {
+  text-decoration: underline;
+}
+
+.petd__header {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+.petd__title-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.petd__title {
+  margin: 0;
+  font-size: clamp(28px, 4vw, 44px);
+  line-height: 1.12;
+  color: #0b1320;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.badge-potd {
+  background: linear-gradient(180deg, #fff7e6, #ffe5b3);
+  border: 1px solid #ffd48a;
+  color: #8a5a00;
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-weight: 800;
+  font-size: 13px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.petd__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 12px;
+  font-size: 13px;
+  border-radius: 999px;
+  border: 1px solid #e5e7eb;
+  background: #fff;
+  color: #374151;
+}
+
+.petd__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+@media (min-width: 900px) {
+  .petd__grid {
+    grid-template-columns: 1.6fr 1fr;
+    gap: 28px;
+  }
+}
+
+.petd__media {
+  margin: 0;
+  border-radius: 22px;
+  overflow: hidden;
+}
+.petd__img {
+  width: 100%;
+  display: block;
+  aspect-ratio: 3 / 2;
+  max-height: 560px;
+  object-fit: cover;
+  object-position: center;
+  background: #eef2f6;
+}
+
+.petd__info {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.petd__panel {
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  background: #fff;
+  padding: 14px 16px;
+}
+
+.petd__desc {
+  margin: 0;
+  color: #263140;
+  line-height: 1.6;
+  font-size: 15.5px;
+}
+.petd__desc--muted {
+  color: #7a8596;
+  font-style: italic;
+}
+
+.petd__stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+}
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: #f8fafc;
+}
+.stat__label {
+  font-size: 12px;
+  color: #667085;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 700;
+}
+.stat__value {
+  font-weight: 900;
+  color: #0b1320;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  font-size: 20px;
+}
+.unit {
+  font-size: 13px;
+  color: #6b7280;
+  font-weight: 600;
+}
+
+.health-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  border: 1px solid #e5e7eb;
+  background: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  color: #374151;
+}
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 9999px;
+  background: #9ca3af;
+}
+
+.petd[data-health='unhealthy'] .dot {
+  background: #ef4444;
+}
+.petd[data-health='healthy'] .dot {
+  background: #22c55e;
+}
+.petd[data-health='very-healthy'] .dot {
+  background: #15803d;
+}
+
+.petd__actions {
+  margin-top: 4px;
+}
+
+.btn {
+  text-decoration: none;
+  font-weight: 700;
+  color: #0b1320;
+  padding: 8px 14px;
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+  background: #fff;
+  transition: all 0.2s ease;
+}
+.btn:hover {
+  background: #f3f4f6;
+}

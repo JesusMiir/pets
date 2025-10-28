@@ -1,0 +1,32 @@
+<div class="container">
+  <app-potd-banner></app-potd-banner>
+
+  <div class="toolbar">
+    <app-pets-controls
+      [value]="query()"
+      (valueChange)="onControlsChange($event)"
+    ></app-pets-controls>
+  </div>
+
+  @if (error()) {
+  <div class="state error">{{ error() }}</div>
+  }
+
+  <ul class="grid">
+    @for (pet of pets(); track pet.id) {
+    <li>
+      <app-pet-card [pet]="pet" />
+    </li>
+    } @empty { @if (loading()) { @for (i of [1,2,3,4,5,6,7,8,9,10,11,12]; track i) {
+    <li class="card skeleton" aria-hidden="true"></li>
+    } } @else {
+    <li class="state">{{ 'NO_PETS_FOUND' | translate }}</li>
+    } }
+  </ul>
+
+  @if (loading() && pets().length > 0) {
+  <div class="loading" aria-live="polite">{{ 'LOADING' | translate }}</div>
+  }
+</div>
+
+<div #sentinel class="sentinel" aria-hidden="true"></div>

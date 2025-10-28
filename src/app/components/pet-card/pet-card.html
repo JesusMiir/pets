@@ -1,0 +1,36 @@
+<a class="card" [routerLink]="['/pets', pet.id]" [attr.data-health]="healthTier">
+  <div class="media">
+    <img
+      class="card__img"
+      [src]="pet.photo_url ? pet.photo_url : URL_IMAGEN_POR_DEFECTO"
+      [alt]="pet.name"
+      loading="lazy"
+      decoding="async"
+      (error)="manejarErrorDeCarga($event)"
+    />
+    @if (isPotd) {
+    <span class="potd-star" aria-label="Pet of the Day">★</span>
+    }
+  </div>
+
+  <div class="card__body">
+    <div class="card__header">
+      <h3 class="card__title">{{ pet.name }}</h3>
+      <span
+        class="health-chip"
+        [attr.aria-label]="('HEALTH_STATUS' | translate) + ': ' + (healthLabel | translate)"
+      >
+        <span class="dot" aria-hidden="true"></span>
+        {{ healthLabel | translate }}
+      </span>
+    </div>
+
+    <div class="card__meta">
+      <span class="meta-item kind">{{ pet.kind | translate }}</span>
+      <span class="meta-sep">·</span>
+      <span class="meta-item">{{ pet.weight / 1000 | number : '1.0-1' }} kg</span>
+      <span class="meta-sep">·</span>
+      <span class="meta-item">{{ pet.height }} cm</span>
+    </div>
+  </div>
+</a>

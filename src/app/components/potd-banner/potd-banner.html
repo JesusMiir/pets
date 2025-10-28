@@ -1,0 +1,16 @@
+<section class="hero-potd" [ngStyle]="bgImage()">
+  <div class="hero-potd__overlay"></div>
+  <div class="hero-potd__content container">
+    <h1 class="hero-potd__title">
+      {{ 'POTD_TITLE' | translate : { name: pet()?.name || '' } }}
+    </h1>
+    <p class="hero-potd__subtitle">
+      {{ 'POTD_SUBTITLE' | translate }}
+    </p>
+
+    <button class="hero-potd__cta" (click)="goToPetOfTheDay()">
+      <span class="hero-potd__dot" aria-hidden="true"></span>
+      {{ 'POTD_CTA' | translate }}
+    </button>
+  </div>
+</section>

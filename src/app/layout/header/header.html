@@ -1,0 +1,38 @@
+<header class="header">
+  <nav class="nav">
+    <a
+      class="fever-logo"
+      routerLink="/"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      Pets
+    </a>
+
+    @if (showSearch()) {
+    <div class="search">
+      <svg class="search__icon" width="16" height="16" viewBox="0 0 20 20" aria-hidden="true">
+        <circle cx="9" cy="9" r="7" fill="none" stroke="currentColor" stroke-width="2"></circle>
+        <line x1="13.5" y1="13.5" x2="18" y2="18" stroke="currentColor" stroke-width="2"></line>
+      </svg>
+      <input
+        class="search__input"
+        type="text"
+        [placeholder]="'TYPE_A_NAME' | translate"
+        aria-label="Search"
+        [value]="currentSearch()"
+        (input)="onSearch($any($event.target).value)"
+      />
+    </div>
+    }
+
+    <div class="spacer"></div>
+
+    <div class="lang-select">
+      <select id="lang" (change)="onLangChange($event)" [value]="currentLang">
+        <option value="en">EN</option>
+        <option value="es">ES</option>
+      </select>
+    </div>
+  </nav>
+</header>

@@ -1,0 +1,87 @@
+<section class="petd" [attr.data-health]="healthTier()">
+  @if (loading()) {
+  <div class="petd__state">{{ 'LOADING' | translate }}</div>
+  } @else if (error()) {
+  <div class="petd__state petd__state--error">{{ 'ERROR_LOADING_PET' | translate }}</div>
+  } @else if (pet()) { @let p = pet()!;
+
+  <nav class="petd__crumbs">
+    <a routerLink="/" class="crumb">← {{ 'BACK' | translate }}</a>
+  </nav>
+
+  <header class="petd__header">
+    <div class="petd__title-wrapper">
+      <h1 class="petd__title">{{ p.name }}</h1>
+      @if (isPotd()) {
+      <span class="badge-potd">{{ 'PET_OF_THE_DAY' | translate }}</span>
+      }
+    </div>
+    <div class="petd__chips">
+      <span class="chip">{{ p.kind | translate }}</span>
+      @if (p.number_of_lives !== undefined) {
+      <span class="chip">{{ 'LIVES' | translate }}: {{ p.number_of_lives }}</span>
+      }
+      <span class="chip health-chip">
+        <span class="dot"></span>
+        {{ healthLabel() | translate }}
+      </span>
+    </div>
+  </header>
+
+  <div class="petd__grid">
+    <figure class="petd__media">
+      <img
+        class="petd__img"
+        [src]="p.photo_url ? p.photo_url : URL_IMAGEN_POR_DEFECTO"
+        [alt]="p.name"
+        (error)="manejarErrorDeCarga($event)"
+        loading="lazy"
+        decoding="async"
+      />
+    </figure>
+
+    <div class="petd__info">
+      <div class="petd__panel">
+        @if (p.description) {
+        <p class="petd__desc">{{ p.description }}</p>
+        } @else {
+        <p class="petd__desc petd__desc--muted">{{ 'NO_DESCRIPTION' | translate }}</p>
+        }
+      </div>
+
+      <div class="petd__panel">
+        <div class="petd__stats">
+          <div class="stat">
+            <span class="stat__label">{{ 'WEIGHT' | translate }}</span>
+            <span class="stat__value"
+              >{{ p.weight / 1000 | number : '1.0-1' }} <span class="unit">kg</span></span
+            >
+          </div>
+          <div class="stat">
+            <span class="stat__label">{{ 'HEIGHT' | translate }}</span>
+            <span class="stat__value">{{ p.height }} <span class="unit">cm</span></span>
+          </div>
+          <div class="stat">
+            <span class="stat__label">{{ 'LENGTH' | translate }}</span>
+            <span class="stat__value">{{ p.length }} <span class="unit">cm</span></span>
+          </div>
+          <div class="stat">
+            <span class="stat__label">{{ 'HEALTH_STATUS' | translate }}</span>
+            <span class="stat__value stat__value--health"
+              ><span class="dot"></span>{{ healthLabel() | translate }}</span
+            >
+          </div>
+          <div class="stat">
+            <span class="stat__label">ID</span>
+            <span class="stat__value">#{{ p.id }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="petd__actions">
+        <a class="btn btn--ghost" routerLink="/">{{ 'BACK_TO_LIST' | translate }}</a>
+      </div>
+    </div>
+  </div>
+  }
+</section>

@@ -1,0 +1,27 @@
+<div class="wrapper">
+  @if (loading()) {
+  <div class="state">{{ 'LOADING' | translate }}</div>
+  } @else if (error()) {
+  <div class="state state--error">{{ 'ERROR_LOADING_PET' | translate }}</div>
+  } @else if (pet()) {
+  <article class="card">
+    <img
+      [src]="pet()!.photo_url || '/img-default.jpg'"
+      [alt]="pet()!.name"
+      (error)="onImgError($event)"
+    />
+    <h1>{{ pet()!.name }}</h1>
+
+    <p class="meta">
+      {{ pet()!.kind | translate }} · {{ pet()!.weight / 1000 | number : '1.0-1' }} kg ·
+      {{ pet()!.length }} cm
+    </p>
+
+    @if (pet()!.description) {
+    <p class="desc">{{ pet()!.description }}</p>
+    } @else {
+    <p class="desc desc--muted">{{ 'NO_DESCRIPTION' | translate }}</p>
+    }
+  </article>
+  }
+</div>

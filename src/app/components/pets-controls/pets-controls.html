@@ -1,0 +1,120 @@
+<div class="controls">
+  <div class="row">
+    <label>
+      <select [value]="value.kind || ''" (change)="onChange('kind', $any($event.target).value)">
+        <option value="">{{ 'KIND' | translate }}</option>
+        <option value="dog">{{ 'DOG' | translate }}</option>
+        <option value="cat">{{ 'CAT' | translate }}</option>
+      </select>
+    </label>
+
+    <button type="button" class="sort-btn" (click)="openSort()">
+      @if (value.sortBy && value.sortOrder) {
+      <span>{{ labelKeyFor(value.sortBy) | translate }}</span>
+      <span class="arrow">{{ value.sortOrder === 'asc' ? '↑' : '↓' }}</span>
+      } @else {
+      <span>{{ 'SORT_BY' | translate }}</span>
+      }
+    </button>
+  </div>
+</div>
+
+@if (showSortModal) {
+<div class="modal-backdrop" (click)="closeSort()"></div>
+
+<div
+  class="modal"
+  (click)="$event.stopPropagation()"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="sortTitle"
+>
+  <div class="modal-card">
+    <div class="modal-header">
+      <h2 id="sortTitle">{{ 'SORT_BY' | translate }}</h2>
+      <button class="icon-btn" aria-label="Close" (click)="closeSort()">✕</button>
+    </div>
+
+    <div class="modal-body">
+      <div class="modal-section">
+        <p class="section-title">{{ 'FIELD' | translate }}</p>
+        <div class="chips">
+          <!-- <button
+            class="chip chip--neutral"
+            [class.active]="draft.sortBy === undefined"
+            (click)="pickSortNone()"
+          >
+            {{ 'NONE' | translate }}
+          </button> -->
+          <button
+            class="chip"
+            [class.active]="draft.sortBy === 'weight'"
+            (click)="pickSortBy('weight')"
+          >
+            {{ 'WEIGHT' | translate }}
+          </button>
+          <button
+            class="chip"
+            [class.active]="draft.sortBy === 'length'"
+            (click)="pickSortBy('length')"
+          >
+            {{ 'LENGTH' | translate }}
+          </button>
+          <button
+            class="chip"
+            [class.active]="draft.sortBy === 'height'"
+            (click)="pickSortBy('height')"
+          >
+            {{ 'HEIGHT' | translate }}
+          </button>
+          <button
+            class="chip"
+            [class.active]="draft.sortBy === 'name'"
+            (click)="pickSortBy('name')"
+          >
+            {{ 'NAME' | translate }}
+          </button>
+          <button
+            class="chip"
+            [class.active]="draft.sortBy === 'kind'"
+            (click)="pickSortBy('kind')"
+          >
+            {{ 'KIND' | translate }}
+          </button>
+        </div>
+      </div>
+
+      <div class="modal-section">
+        <p class="section-title">{{ 'ORDER' | translate }}</p>
+        <div class="chips">
+          <!-- <button
+            class="chip chip--neutral"
+            [class.active]="draft.sortOrder === undefined"
+            (click)="pickOrderNone()"
+          >
+            {{ 'NONE' | translate }}
+          </button> -->
+          <button
+            class="chip"
+            [class.active]="draft.sortOrder === 'asc'"
+            (click)="pickOrder('asc')"
+          >
+            Asc ↑
+          </button>
+          <button
+            class="chip"
+            [class.active]="draft.sortOrder === 'desc'"
+            (click)="pickOrder('desc')"
+          >
+            Desc ↓
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button class="primary-btn" (click)="applyAndClose()">{{ 'APPLY' | translate }}</button>
+    </div>
+  </div>
+</div>
+}
